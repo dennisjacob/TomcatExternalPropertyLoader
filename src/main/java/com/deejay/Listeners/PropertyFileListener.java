@@ -1,4 +1,4 @@
-package com.deejay;
+package com.deejay.Listeners;
 
 
 import org.apache.catalina.Lifecycle;
@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 public class PropertyFileListener implements LifecycleListener {
 
+    //Using Tomcat's default log approch
     private static final Log logger = LogFactory.getLog(PropertyFileListener.class);
     private static final StringManager sm = StringManager.getManager(PropertyFileListener.class);
 
@@ -77,7 +78,7 @@ public class PropertyFileListener implements LifecycleListener {
 
                             String propValue = replacePlaceholders(properties.getProperty(prop));
                             logger.info(sm.getString("Setting Property : " + prop + "  Value :" + propValue));
-                            
+
                             if (!propValue.equals("")) {
                                 System.setProperty(prop, propValue);
                             }
