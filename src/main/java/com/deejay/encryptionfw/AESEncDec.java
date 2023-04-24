@@ -50,7 +50,7 @@ public class AESEncDec implements AESSecure{
 
         if (!ipAddress.isEmpty() && !macAddress.isEmpty()) {
             String secretBuilder = ipAddress + "->" +macAddress;
-            SecureUtilLogger.log(Level.INFO, "Secret Key : " + secretBuilder  );
+            HelperLogger.log(Level.INFO, "Secret Key : " + secretBuilder  );
 
             try {
                 // Generate a secret using ENC_SECRET_KEY_DIGEST_SIZE hash of IP Address and MAC
@@ -64,13 +64,13 @@ public class AESEncDec implements AESSecure{
 
             } catch (NoSuchAlgorithmException e) {
 
-                SecureUtilLogger.log(Level.SEVERE, "No MAC Algorithm found" );
+                HelperLogger.log(Level.SEVERE, "No MAC Algorithm found" );
                 e.printStackTrace();
 
             }
         }
         else {
-            SecureUtilLogger.log(Level.SEVERE, "Unable to determine IP Or MAC of the system");
+            HelperLogger.log(Level.SEVERE, "Unable to determine IP Or MAC of the system");
         }
     }
 
@@ -89,8 +89,8 @@ public class AESEncDec implements AESSecure{
 
 
             // Higher iterations makes Secretkey gen slower, but less secure.
-            //SecureUtilLogger.log(Level.FINE, "Iteration Count : " + ITERATION_COUNT );
-            //SecureUtilLogger.log(Level.FINE,"Key Length : " + KEY_LENGTH);
+            //HelperLogger.log(Level.FINE, "Iteration Count : " + ITERATION_COUNT );
+            //HelperLogger.log(Level.FINE,"Key Length : " + KEY_LENGTH);
 
             KeySpec spec = new PBEKeySpec(
                                 getSecretKey().toCharArray(),
@@ -114,7 +114,7 @@ public class AESEncDec implements AESSecure{
             return Base64.getEncoder()
                     .encodeToString(cipher.doFinal(pText.getBytes(StandardCharsets.UTF_8)));
         } catch (Exception e) {
-            SecureUtilLogger.log(Level.SEVERE, "Error in encryption. ");
+            HelperLogger.log(Level.SEVERE, "Error in encryption. ");
             e.printStackTrace();
         }
 
@@ -132,8 +132,8 @@ public class AESEncDec implements AESSecure{
             //Using PBKDF2 for Keygen
             SecretKeyFactory factory = SecretKeyFactory.getInstance(EncryptionFWConfig.KEYGEN_ALG);
 
-            //SecureUtilLogger.log(Level.FINE, "Iteration Count : " + ITERATION_COUNT );
-            //SecureUtilLogger.log(Level.FINE,"Key Length : " + KEY_LENGTH);
+            //HelperLogger.log(Level.FINE, "Iteration Count : " + ITERATION_COUNT );
+            //HelperLogger.log(Level.FINE,"Key Length : " + KEY_LENGTH);
 
             // Higher iterations makes Secretkey gen slower, but less secure.
             KeySpec spec = new PBEKeySpec(
@@ -150,7 +150,7 @@ public class AESEncDec implements AESSecure{
 
             return new String(cipher.doFinal(Base64.getDecoder().decode(encText)));
         } catch (Exception e) {
-            SecureUtilLogger.log(Level.SEVERE, "Error in decryption.");
+            HelperLogger.log(Level.SEVERE, "Error in decryption.");
             e.printStackTrace();
         }
         return null;

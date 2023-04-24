@@ -18,7 +18,7 @@ public  class HelperUtils {
             ip = InetAddress.getLocalHost();
             ipAddress = ip.getHostAddress();
         } catch (UnknownHostException e) {
-            SecureUtilLogger.log(Level.SEVERE, "Unable to get the IP Address" );
+            HelperLogger.log(Level.SEVERE, "Unable to get the IP Address" );
             e.printStackTrace();
         }
         return ipAddress;
@@ -38,10 +38,10 @@ public  class HelperUtils {
             }
             macAddress = sb.toString();
         } catch (UnknownHostException e) {
-            SecureUtilLogger.log(Level.SEVERE, "Unknown Host" );
+            HelperLogger.log(Level.SEVERE, "Unknown Host" );
             e.printStackTrace();
         } catch (SocketException e) {
-            SecureUtilLogger.log(Level.SEVERE, "Unable to get the Network Address" );
+            HelperLogger.log(Level.SEVERE, "Unable to get the Network Address" );
             e.printStackTrace();
         }
         return macAddress;
@@ -67,7 +67,7 @@ public  class HelperUtils {
             hostname = InetAddress.getLocalHost().getHostName();
         }
         catch (UnknownHostException e) {
-            SecureUtilLogger.log(Level.SEVERE, "Unable to identify the hostname" );
+            HelperLogger.log(Level.SEVERE, "Unable to identify the hostname" );
             e.printStackTrace();
         }
         return hostname;

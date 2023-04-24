@@ -1,7 +1,7 @@
 package com.deejay.PropSources;
 
+import com.deejay.HelperUtils.HelperLogger;
 import com.deejay.HelperUtils.HelperUtils;
-import com.deejay.HelperUtils.SecureUtilLogger;
 import com.deejay.encryptionfw.AESEncDec;
 import org.apache.tomcat.util.IntrospectionUtils;
 
@@ -26,7 +26,7 @@ public class CustomSystemPropertySource implements IntrospectionUtils.PropertySo
            // If a property value is not NULL, having a justifiable size and with SECURECONFIG string
            if ( (PropertyValue.length() > 10 &&  PropertyValue.contains("SECURECONFIG"))) {
 
-               SecureUtilLogger.log(Level.INFO, "For the property " + prop + " Value before decryption is " +  PropertyValue );
+               HelperLogger.log(Level.INFO, "For the property " + prop + " Value before decryption is " +  PropertyValue );
 
                extractedPropValue = PropertyValue
                             .trim()
@@ -37,8 +37,8 @@ public class CustomSystemPropertySource implements IntrospectionUtils.PropertySo
 
                if (! helperUtils.isNullOrEmpty(decryptedPropValue))
                {
-                   SecureUtilLogger.log(Level.INFO, "Decrypted value for the key " +  prop);
-                   SecureUtilLogger.log(Level.INFO, "Decrypted value for the key " +  decryptedPropValue);
+                   HelperLogger.log(Level.INFO, "Decrypted value for the key " +  prop);
+                   HelperLogger.log(Level.INFO, "Decrypted value for the key " +  decryptedPropValue);
                    System.setProperty(prop, decryptedPropValue);
                }
 
